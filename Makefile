@@ -1,4 +1,7 @@
 .PHONY: start
 
 start :
-	php bin/console server:start
+	symfony server:start
+
+log :
+	symfony server:log
