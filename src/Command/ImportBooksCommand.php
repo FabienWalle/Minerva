@@ -49,6 +49,7 @@ class ImportBooksCommand extends Command
             'cuisine',
             'voyage',
             'biographie',
+            'fantastique'
         ];
 
         $client = HttpClient::create();
@@ -60,7 +61,7 @@ class ImportBooksCommand extends Command
                 $response = $client->request(
                     'GET',
                     sprintf(
-                        'https://www.googleapis.com/books/v1/volumes?q=subject:%s&maxResults=10&langRestrict=fr&key=%s',
+                        'https://www.googleapis.com/books/v1/volumes?q=subject:%s&maxResults=10&printType=books&orderBy=relevance&langRestrict=fr&key=%s',
                         urlencode($theme),
                         $this->googleBooksApiKey
                     )
