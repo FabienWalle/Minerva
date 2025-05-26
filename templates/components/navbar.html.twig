@@ -1,0 +1,15 @@
+<nav class="flex justify-between p-2 bg-gray-100">
+    <div class="">
+        <a href="{{ path('app_home') }}">
+            <img class="mx-auto h-10 w-auto" src="{{ asset('images/owl.svg') }}" alt="Minerva">
+        </a>
+
+    </div>
+    <div class="space-x-2 items-center flex justify-around">
+        <a href="#" class="text-sm/6 font-semibold text-gray-900">Collection</a>
+        <a href="#" class="text-sm/6 font-semibold text-gray-900">Tableau de bord</a>
+    </div>
+    <div>
+        <a href="{{ path('app_logout') }}" class="text-sm/6 font-semibold text-gray-900">Logout</a>
+    </div>
+</nav>

@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -17,6 +20,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank()]
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
@@ -31,6 +35,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    /**
+     * @var Collection<int, Borrowing>
+     */
+    #[ORM\OneToMany(targetEntity: Borrowing::class, mappedBy: 'borrowedBy')]
+    private Collection $borrowings;
+
+    public function __construct()
+    {
+        $this->borrowings = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -65,7 +80,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -103,5 +117,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, Borrowing>
+     */
+    public function getBorrowings(): Collection
+    {
+        return $this->borrowings;
+    }
+
+    public function addBorrowing(Borrowing $borrowing): static
+    {
+        if (!$this->borrowings->contains($borrowing)) {
+            $this->borrowings->add($borrowing);
+            $borrowing->setBorrowedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBorrowing(Borrowing $borrowing): static
+    {
+        if ($this->borrowings->removeElement($borrowing)) {
+            // set the owning side to null (unless already changed)
+            if ($borrowing->getBorrowedBy() === $this) {
+                $borrowing->setBorrowedBy(null);
+            }
+        }
+
+        return $this;
     }
 }
