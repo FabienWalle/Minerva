@@ -22,7 +22,7 @@ class Book
     private ?string $title = null;
 
     #[Assert\NotBlank]
-    #[ORM\Column(length: 4)]
+    #[ORM\Column(length: 4, nullable:true)]
     private ?string $year = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -43,11 +43,18 @@ class Book
     #[ORM\ManyToMany(targetEntity: Author::class, inversedBy: 'books')]
     private Collection $authors;
 
+    /**
+     * @var Collection<int, Theme>
+     */
+    #[ORM\ManyToMany(targetEntity: Theme::class, inversedBy: 'books')]
+    private Collection $theme;
+
 
     public function __construct()
     {
         $this->bookCopies = new ArrayCollection();
         $this->authors = new ArrayCollection();
+        $this->theme = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -67,12 +74,12 @@ class Book
         return $this;
     }
 
-    public function getYear(): ?int
+    public function getYear(): ?string
     {
         return $this->year;
     }
 
-    public function setYear(int $year): static
+    public function setYear(string $year): static
     {
         $this->year = $year;
 
@@ -153,6 +160,30 @@ class Book
     public function removeAuthor(Author $author): static
     {
         $this->authors->removeElement($author);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Theme>
+     */
+    public function getTheme(): Collection
+    {
+        return $this->theme;
+    }
+
+    public function addTheme(Theme $theme): static
+    {
+        if (!$this->theme->contains($theme)) {
+            $this->theme->add($theme);
+        }
+
+        return $this;
+    }
+
+    public function removeTheme(Theme $theme): static
+    {
+        $this->theme->removeElement($theme);
 
         return $this;
     }

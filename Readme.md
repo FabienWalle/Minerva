@@ -20,9 +20,7 @@ MAILER_DSN=null://null
 
 ### Créer la bdd
 ```shell
-symfony console doctrine:database:create
-symfony console make:migration
-symfony console d:m:m
+make new-db
 ```
 
 # Workflow du projet
