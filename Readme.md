@@ -16,7 +16,10 @@ APP_SECRET=be147348de343f8abdea745b73ead9af
 DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=16&charset=utf8"
 MESSENGER_TRANSPORT_DSN=doctrine://default?auto_setup=0
 MAILER_DSN=null://null
+GOOGLE_BOOK_API_KEY=
 ```
+
+Penser à se créer une clé api pour Google Api, puis :
 
 ### Créer la bdd
 ```shell
