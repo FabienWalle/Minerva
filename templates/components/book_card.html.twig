@@ -5,16 +5,16 @@
              alt="Couverture du livre {{ book.title }}" />
     </a>
     <div class="flex-grow flex flex-col p-2">
-        <h5 class="text-sm font-bold line-clamp-2 text-gray-900">
+        <h5 class="text-sm font-bold text-gray-900 truncate w-full">
             {% if book.authors|length > 0 %}
-                {{ book.authors|map(a => a.name)|join(', ') }}
+                {{ book.authors[0].name }}
             {% else %}
                 Auteur inconnu
             {% endif %}
         </h5>
-        <span class="text-xs text-gray-700 line-clamp-2">{{ book.title }}</span>
-        <span class="text-xs text-gray-500 italic line-clamp-2 mt-auto">
-            {{ book.year ? book.year ~ ' - ' : '' }}{{ book.description|default('Aucune description') }}
+        <span class="text-xs text-gray-700 line-clamp-3">{{ book.year ? book.year ~ ' - ' : '' }}{{ book.title }}</span>
+        <span class="text-xs text-gray-500 italic line-clamp-2">
+            {{ book.description|default('Aucune description') }}
         </span>
     </div>
 </div>
