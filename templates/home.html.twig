@@ -2,6 +2,20 @@
 
 {% block title %}Accueil{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
+    </style>
+{% endblock %}
+
 {% block body %}
-    <div>Hi Mom' I'm on TV !</div>
+    {% for theme in themes %}
+        {% include 'components/book_slider.html.twig' with {
+            slider_id: 'slider_' ~ theme.id,
+            card_title: theme.name,
+            books: theme.books
+        } %}
+    {% endfor %}
 {% endblock %}

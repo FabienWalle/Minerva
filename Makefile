@@ -15,6 +15,7 @@ reset-db:
 seed :
 	php bin/console app:import-books --themes
 	php bin/console app:import-books --authors
+	php bin/console doctrine:fixtures:load --append
 
 new-db:
 	php bin/console doctrine:database:create
@@ -22,3 +23,4 @@ new-db:
 	php bin/console doctrine:migrations:migrate -n
 	php bin/console app:import-books --themes
 	php bin/console app:import-books --authors
+	php bin/console doctrine:fixtures:load --append

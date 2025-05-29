@@ -25,6 +25,12 @@ Penser à se créer une clé api pour Google Api, puis :
 ```shell
 make new-db
 ```
+Un user de test est créé
+```
+email : toto@toto.fr
+mdp : toto
+```
+
 
 # Workflow du projet
 (Généré par DeepSeek, à corriger au fur et à mesure)

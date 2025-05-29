@@ -29,7 +29,7 @@ class Borrowing
 
     #[ORM\ManyToOne(inversedBy: 'borrowings')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?bookCopy $bookCopy = null;
+    private ?BookCopy $bookCopy = null;
 
     public function getId(): ?int
     {
@@ -84,12 +84,12 @@ class Borrowing
         return $this;
     }
 
-    public function getBookCopy(): ?bookCopy
+    public function getBookCopy(): ?BookCopy
     {
         return $this->bookCopy;
     }
 
-    public function setBookCopy(?bookCopy $bookCopy): static
+    public function setBookCopy(?BookCopy $bookCopy): static
     {
         $this->bookCopy = $bookCopy;
 

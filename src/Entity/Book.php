@@ -47,14 +47,14 @@ class Book
      * @var Collection<int, Theme>
      */
     #[ORM\ManyToMany(targetEntity: Theme::class, inversedBy: 'books')]
-    private Collection $theme;
+    private Collection $themes;
 
 
     public function __construct()
     {
         $this->bookCopies = new ArrayCollection();
         $this->authors = new ArrayCollection();
-        $this->theme = new ArrayCollection();
+        $this->themes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -169,13 +169,13 @@ class Book
      */
     public function getTheme(): Collection
     {
-        return $this->theme;
+        return $this->themes;
     }
 
     public function addTheme(Theme $theme): static
     {
-        if (!$this->theme->contains($theme)) {
-            $this->theme->add($theme);
+        if (!$this->themes->contains($theme)) {
+            $this->themes->add($theme);
         }
 
         return $this;
@@ -183,7 +183,7 @@ class Book
 
     public function removeTheme(Theme $theme): static
     {
-        $this->theme->removeElement($theme);
+        $this->themes->removeElement($theme);
 
         return $this;
     }

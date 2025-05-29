@@ -14,7 +14,9 @@
     {% endblock %}
 </head>
 <body class="h-full bg-white">
-{% if app.user %}{{ include('components/navbar.html.twig') }}{% endif %}
+{{ include('components/navbar.html.twig') }}
 {% block body %}{% endblock %}
+
+{{ block('javascripts') }}
 </body>
 </html>

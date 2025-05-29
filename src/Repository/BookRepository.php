@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Book;
+use App\Entity\Theme;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,28 +17,35 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-//    /**
-//     * @return Book[] Returns an array of Book objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('b.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findThemesWithMinBooks(int $min = 10): array
+    {
+        $entityManager = $this->getEntityManager();
 
-//    public function findOneBySomeField($value): ?Book
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $themeIds = $entityManager->createQueryBuilder()
+            ->select('t.id')
+            ->from(Theme::class, 't')
+            ->join('t.books', 'b')
+            ->groupBy('t.id')
+            ->having('COUNT(b.id) >= :min')
+            ->setParameter('min', $min)
+            ->getQuery()
+            ->getSingleColumnResult();
+
+        if (empty($themeIds)) {
+            return [];
+        }
+
+        return $entityManager->createQueryBuilder()
+            ->select('t', 'b', 'a')
+            ->from(Theme::class, 't')
+            ->join('t.books', 'b')
+            ->leftJoin('b.authors', 'a')
+            ->where('t.id IN (:ids)')
+            ->setParameter('ids', $themeIds)
+            ->orderBy('t.name', 'ASC')
+            ->addOrderBy('b.title', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

@@ -21,7 +21,7 @@ class Theme
     /**
      * @var Collection<int, Book>
      */
-    #[ORM\ManyToMany(targetEntity: Book::class, mappedBy: 'theme')]
+    #[ORM\ManyToMany(targetEntity: Book::class, mappedBy: 'themes')]
     private Collection $books;
 
     public function __construct()
