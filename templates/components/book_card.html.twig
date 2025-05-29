@@ -1,19 +1,19 @@
-<div class="flex-shrink-0 w-[11rem] h-[15rem] bg-white rounded-lg shadow flex flex-col">
+<div class="flex-shrink-0 w-[11rem] h-[16rem] bg-white rounded-lg shadow flex flex-col shadow-md">
     <a href="#" class="flex-shrink-0 h-[10rem] block overflow-hidden rounded-t-lg">
         <img class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
              src="{{ asset(book.cover ?? 'images/no-cover-book.png') }}"
              alt="Couverture du livre {{ book.title }}" />
     </a>
     <div class="flex-grow flex flex-col p-2">
-        <h5 class="text-sm font-bold text-gray-900 truncate w-full">
+        <h5 class="text-sm font-bold text-gray-900 line-clamp-1 w-full">
             {% if book.authors|length > 0 %}
                 {{ book.authors[0].name }}
             {% else %}
                 Auteur inconnu
             {% endif %}
         </h5>
-        <span class="text-xs text-gray-700 line-clamp-3">{{ book.year ? book.year ~ ' - ' : '' }}{{ book.title }}</span>
-        <span class="text-xs text-gray-500 italic line-clamp-2">
+        <span class="text-xs text-gray-700 text-justify line-clamp-1">{{ book.year ? book.year ~ ' - ' : '' }}{{ book.title }}</span>
+        <span class="text-xs text-gray-500 italic line-clamp-2 text-justify">
             {{ book.description|default('Aucune description') }}
         </span>
     </div>

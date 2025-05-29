@@ -12,10 +12,10 @@
 
 {% block body %}
     {% for theme in themes %}
-        {% include 'components/book_slider.html.twig' with {
-            slider_id: 'slider_' ~ theme.id,
-            card_title: theme.name,
-            books: theme.books
-        } %}
+        <twig:BookSlider
+                sliderId="slider_{{ theme.id }}"
+                cardTitle="{{ theme.name }}"
+                :books="theme.books"
+        />
     {% endfor %}
 {% endblock %}

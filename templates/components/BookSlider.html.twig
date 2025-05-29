@@ -1,0 +1,42 @@
+<div
+        class="p-4 max-w-7xl mx-auto"
+        {{ stimulus_controller('book-slider', {
+            sliderId: sliderId
+        }) }}
+        data-testid="book-slider-container"
+>
+    <div class="flex justify-between items-center">
+        <h2 class="text-xl font-bold capitalize">{{ cardTitle }}</h2>
+        {% if books|length > 0 %}
+            <div class="flex gap-2">
+                <button
+                        data-action="click->book-slider#prev"
+                        class="text-black rounded"
+                >
+                    <twig:ux:icon name="heroicons-solid:chevron-left" class="size-6 text-gray-600" />
+                </button>
+                <button
+                        data-action="click->book-slider#next"
+                        class="text-black rounded"
+                >
+                    <twig:ux:icon name="heroicons-solid:chevron-right" class="size-6 text-gray-600" />
+                </button>
+            </div>
+        {% endif %}
+    </div>
+
+    {% if books|length > 0 %}
+        <div
+                id="slider-{{ sliderId }}"
+                class="flex overflow-x-auto space-x-2 w-full p-1 mt-2 scrollbar-hide"
+        >
+            {% for book in books %}
+                <twig:book_card
+                        :book="book"
+                />
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-gray-500">Aucun livre disponible dans ce thème</p>
+    {% endif %}
+</div>
