@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Enums\BookStatus;
 use App\Repository\BookRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -55,6 +56,16 @@ class Book
         $this->bookCopies = new ArrayCollection();
         $this->authors = new ArrayCollection();
         $this->themes = new ArrayCollection();
+    }
+
+    public function isAvailable(): bool
+    {
+        foreach ($this->bookCopies as $copy) {
+            if ($copy->getStatus() === BookStatus::AVAILABLE) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function getId(): ?int
