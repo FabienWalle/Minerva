@@ -3,7 +3,9 @@
 {% block title %} {{ book.title }} {% endblock %}
 
 {% block body %}
-    Hi Mom I'm On Tv !
+    <div class="h-[80vh] p-6">
+        <twig:Book:BookDetails
+                book="{{ book }}"/>
+    </div>
 
-{{ book.title }}
 {% endblock %}

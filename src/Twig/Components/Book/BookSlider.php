@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Twig\Components;
+namespace App\Twig\Components\Book;
 
 use App\Entity\Book;
-use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
-
 use Doctrine\Common\Collections\Collection;
+use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent]
 final class BookSlider
