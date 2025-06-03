@@ -1,5 +1,5 @@
 <div
-        class="p-4 max-w-7xl mx-auto"
+        class="p-4 max-w-9xl mx-auto"
         {{ stimulus_controller('book-slider', {
             sliderId: sliderId
         }) }}
@@ -28,7 +28,7 @@
     {% if books|length > 0 %}
         <div
                 id="slider-{{ sliderId }}"
-                class="flex overflow-x-auto space-x-2 w-full p-1 mt-2 scrollbar-hide"
+                class="flex overflow-x-auto gap-4 w-full p-1 mt-2 scrollbar-hide"
         >
             {% for book in books %}
                 <twig:book_card

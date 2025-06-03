@@ -10,12 +10,22 @@
     </style>
 {% endblock %}
 
-{% block body %}
-    {% for theme in themes %}
-        <twig:book_slider
-                sliderId="slider_{{ theme.id }}"
-                cardTitle="{{ theme.name }}"
-                :books="theme.books"
-        />
-    {% endfor %}
-{% endblock %}
+    {% block body %}
+        {% if themes is defined %}
+            {% for theme in themes %}
+                <twig:book_slider
+                        sliderId="slider_{{ theme.id }}"
+                        cardTitle="{{ theme.name }}"
+                        :books="theme.books"
+                />
+            {% endfor %}
+        {% elseif authors is defined %}
+            {% for author in authors %}
+                <twig:book_slider
+                        sliderId="slider_author_{{ author.id }}"
+                        cardTitle="{{ author.name }}"
+                        :books="author.books"
+                />
+            {% endfor %}
+        {% endif %}
+    {% endblock %}

@@ -19,7 +19,7 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 class BookImporter
 {
     private const API_BASE_URL = 'https://www.googleapis.com/books/v1/volumes';
-    private const MAX_RESULTS = 10;
+    private const MAX_RESULTS = 30;
     private const REQUEST_DELAY = 1;
 
     private array $themes = [
@@ -48,6 +48,8 @@ class BookImporter
         'Chrétien de Troyes',
         'Toni Morrison',
         'Fiodor Dostoïevski',
+        'Platon',
+        'Arthur Conan Doyle'
     ];
 
     public function __construct(
@@ -148,6 +150,12 @@ class BookImporter
         }
 
         $bookTitle = $volumeInfo['title'] ?? 'Unknown Title';
+
+        if (empty($volumeInfo['imageLinks']['thumbnail'])) {
+            $output->writeln(sprintf('Skipping "%s" (no thumbnail)', $bookTitle));
+            return;
+        }
+
         $book = $this->entityManager->getRepository(Book::class)->findOneBy(['title' => $bookTitle]);
 
         if ($book) {

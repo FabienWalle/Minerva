@@ -5,21 +5,22 @@
         </a>
     </div>
 
-    {% if this.isAuthenticated() %}
-        <div class="space-x-2 items-center flex justify-around">
-            <a href="#" class="text-sm/6 font-semibold text-gray-900 hover:text-blue-500">Collection</a>
-            <a href="#" class="text-sm/6 font-semibold text-gray-900 hover:text-blue-500">Tableau de bord</a>
-        </div>
-    {% endif %}
+    <div class="space-x-2 items-center flex justify-around">
+        <a href="{{ path('app_home') }}"
+           class="text-sm/6 font-semibold text-gray-900 hover:text-blue-500">Thèmes</a>
+        <a href="{{ path('app_home', { sliders: 'authors' }) }}" class="text-sm/6 font-semibold text-gray-900 hover:text-blue-500">Auteurs</a>
+    </div>
 
     <div class="space-x-2">
         {% if this.isAuthenticated() %}
-            <a href="{{ path('app_logout') }}" class="text-sm/6 font-semibold text-gray-900 hover:text-red-500">Logout</a>
+            <a href="{{ path('app_logout') }}"
+               class="text-sm/6 font-semibold text-gray-900 hover:text-red-500">Logout</a>
             {% if this.getUserIdentifier() %}
                 <span class="text-sm/6 text-gray-500">{{ this.getUserIdentifier() }}</span>
             {% endif %}
         {% else %}
-            <a href="{{ path('app_login') }}" class="text-sm/6 font-semibold text-gray-900 hover:text-blue-500">Login</a>
+            <a href="{{ path('app_login') }}"
+               class="text-sm/6 font-semibold text-gray-900 hover:text-blue-500">Login</a>
             <a href="{{ path('app_register') }}" class="text-sm/6 font-semibold text-gray-900 hover:text-green-500">Register</a>
         {% endif %}
     </div>

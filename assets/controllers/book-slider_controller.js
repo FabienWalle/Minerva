@@ -3,10 +3,6 @@ import { Controller } from '@hotwired/stimulus';
 export default class extends Controller {
     static values = { sliderId: String };
 
-    connect() {
-        console.log('BookSlider connected for:', this.sliderIdValue);
-    }
-
     prev(event) {
         event.preventDefault();
         const slider = document.getElementById(`slider-${this.sliderIdValue}`);

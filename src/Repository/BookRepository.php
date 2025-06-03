@@ -36,6 +36,46 @@ class BookRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAuthorsWithMinBooks(int $minBooks = 5): array
+    {
+        $authorIds = $this->getAuthorIdsWithMinBooks($minBooks);
+
+        if (empty($authorIds)) {
+            return [];
+        }
+
+        return $this->createAuthorsWithBooksQuery($authorIds)
+            ->getQuery()
+            ->getResult();
+    }
+
+    private function getAuthorIdsWithMinBooks(int $minBooks): array
+    {
+        return $this->createBaseQueryBuilder()
+            ->select('a.id')
+            ->from('App\Entity\Author', 'a')
+            ->join('a.books', 'b')
+            ->groupBy('a.id')
+            ->having('COUNT(b.id) >= :min')
+            ->setParameter('min', $minBooks)
+            ->getQuery()
+            ->getSingleColumnResult();
+    }
+
+    private function createAuthorsWithBooksQuery(array $authorIds): QueryBuilder
+    {
+        return $this->createBaseQueryBuilder()
+            ->select('a', 'b', 'ba')
+            ->from('App\Entity\Author', 'a')
+            ->join('a.books', 'b')
+            ->leftJoin('b.authors', 'ba')
+            ->where('a.id IN (:ids)')
+            ->setParameter('ids', $authorIds)
+            ->orderBy('a.name', 'ASC')
+            ->addOrderBy('b.title', 'ASC');
+    }
+
+
     private function getThemeIdsWithMinBooks(int $minBooks): array
     {
         return $this->createBaseQueryBuilder()
