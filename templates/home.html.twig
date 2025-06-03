@@ -12,7 +12,7 @@
 
 {% block body %}
     {% for theme in themes %}
-        <twig:BookSlider
+        <twig:book_slider
                 sliderId="slider_{{ theme.id }}"
                 cardTitle="{{ theme.name }}"
                 :books="theme.books"

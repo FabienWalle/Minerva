@@ -16,17 +16,18 @@ class BookCopy
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'bookCopies')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Book $Book = null;
 
     #[ORM\Column(enumType: BookStatus::class)]
     private ?BookStatus $status = BookStatus::AVAILABLE;
 
+    #[ORM\ManyToOne(inversedBy: 'bookCopies')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Book $book = null;
+
     /**
      * @var Collection<int, Borrowing>
      */
-    #[ORM\OneToMany(targetEntity: Borrowing::class, mappedBy: 'BookCopy')]
+    #[ORM\OneToMany(targetEntity: Borrowing::class, mappedBy: 'bookCopy')]
     private Collection $borrowings;
 
     public function __construct()
@@ -53,12 +54,12 @@ class BookCopy
 
     public function getBook(): ?Book
     {
-        return $this->Book;
+        return $this->book;
     }
 
     public function setBook(?Book $Book): static
     {
-        $this->Book = $Book;
+        $this->book = $Book;
 
         return $this;
     }

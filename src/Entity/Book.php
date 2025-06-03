@@ -34,7 +34,7 @@ class Book
     /**
      * @var Collection<int, BookCopy>
      */
-    #[ORM\OneToMany(targetEntity: BookCopy::class, mappedBy: 'Book')]
+    #[ORM\OneToMany(targetEntity: BookCopy::class, mappedBy: 'book')]
     private Collection $bookCopies;
 
     /**

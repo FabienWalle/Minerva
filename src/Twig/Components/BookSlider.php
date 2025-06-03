@@ -2,12 +2,17 @@
 
 namespace App\Twig\Components;
 
+use App\Entity\Book;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
-#[AsTwigComponent('book-slider')]
+use Doctrine\Common\Collections\Collection;
+
+#[AsTwigComponent('book_slider')]
 final class BookSlider
 {
     public string $sliderId;
     public string $cardTitle;
-    public array $books = [];
+
+    /** @var iterable<Book>|Collection<Book>|array */
+    public iterable $books = [];
 }
