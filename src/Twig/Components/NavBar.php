@@ -5,8 +5,8 @@ namespace App\Twig\Components;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
-#[AsTwigComponent('nav_bar')]
-final readonly class Navbar
+#[AsTwigComponent]
+final readonly class NavBar
 {
     public function __construct(private Security $security) {}
 
