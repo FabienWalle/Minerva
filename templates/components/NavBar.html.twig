@@ -1,26 +1,27 @@
-<nav class="flex justify-between p-2 bg-gray-200 shadow-md">
-    <div class="flex">
+<nav class="flex justify-between items-center p-2 bg-gray-200 shadow-md">
+    <div class="flex items-center space-x-4">
         <a href="{{ path('app_home') }}">
-            <img class="mx-auto h-6 w-auto" src="{{ asset('images/owl.svg') }}" alt="Minerva">
+            <img class="h-6 w-auto" src="{{ asset('images/owl.svg') }}" alt="Minerva">
         </a>
+
+        {% component 'dropdown' with {
+            buttonText: 'Collections',
+            buttonIcon: '📚',
+            position: 'left',
+            items: [
+                { label: 'Thèmes', path: path('app_home') },
+                { label: 'Auteurs', path: path('app_home', { sliders: 'authors' }) }
+            ]
+        } %}
+        {% endcomponent %}
     </div>
 
-    <div class="space-x-2 items-center flex justify-around">
-        <a href="{{ path('app_home') }}"
-           class="text-sm/6 font-semibold text-gray-900 hover:text-blue-500">Thèmes</a>
-        <a href="{{ path('app_home', { sliders: 'authors' }) }}" class="text-sm/6 font-semibold text-gray-900 hover:text-blue-500">Auteurs</a>
-    </div>
-
-    <div class="space-x-2">
+    <div class="flex items-center space-x-4">
         {% if this.isAuthenticated() %}
-            <a href="{{ path('app_logout') }}"
-               class="text-sm/6 font-semibold text-gray-900 hover:text-red-500">Logout</a>
-            {% if this.getUserIdentifier() %}
-                <span class="text-sm/6 text-gray-500">{{ this.getUserIdentifier() }}</span>
-            {% endif %}
+            <span class="text-sm/6 text-gray-500">{{ this.getUserIdentifier() }}</span>
+            <a href="{{ path('app_logout') }}" class="text-sm/6 font-semibold text-red-500 hover:text-red-700">Logout</a>
         {% else %}
-            <a href="{{ path('app_login') }}"
-               class="text-sm/6 font-semibold text-gray-900 hover:text-blue-500">Login</a>
+            <a href="{{ path('app_login') }}" class="text-sm/6 font-semibold text-gray-900 hover:text-blue-500">Login</a>
             <a href="{{ path('app_register') }}" class="text-sm/6 font-semibold text-gray-900 hover:text-green-500">Register</a>
         {% endif %}
     </div>
