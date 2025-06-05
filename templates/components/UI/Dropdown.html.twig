@@ -1,5 +1,5 @@
 <div class="relative" data-controller="dropdown" data-action="click->dropdown#toggle click@window->dropdown#hide">
-    <twig:Button
+    <twig:UI:Button
             text="{{ buttonText }}"
             icon="{{ buttonIcon }}"
             iconClass="{{ buttonIconClass }}"
@@ -11,7 +11,7 @@
         {% for item in items %}
             <a href="{{ item.path }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 {% if item.icon is defined and item.icon is not empty %}
-                    <twig:Icon
+                    <twig:UI:Icon
                             name="{{ item.icon }}"
                             class="{{ item.iconClass ?? '' }} mr-2"
                             width="{{ item.iconSize ?? '16' }}"

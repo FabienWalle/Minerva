@@ -3,7 +3,7 @@
         <a href="{{ path('app_home') }}">
             <img class="h-6 w-auto" src="{{ asset('images/owl.svg') }}" alt="Minerva">
         </a>
-        <twig:Dropdown
+        <twig:UI:Dropdown
                 buttonText="Collections"
                 position="left"
                 :items="[
@@ -15,7 +15,7 @@
 
     <div class="flex items-center space-x-4">
         {% if this.isAuthenticated() %}
-            <twig:Dropdown
+            <twig:UI:Dropdown
                     buttonIcon="gg:profile"
                     buttonIconSize="20"
                     buttonIconClass="text-gray-600"
@@ -46,11 +46,11 @@
         {% else %}
             <div class="flex items-center space-x-4">
                 <a href="{{ path('app_login') }}" class="flex items-center gap-1 text-sm/6 font-semibold text-gray-900 hover:text-blue-500">
-                    <twig:Icon name="heroicons:arrow-right-on-rectangle" class="text-gray-500" width="16" height="16" />
+                    <twig:UI:Icon name="heroicons:arrow-right-on-rectangle" class="text-gray-500" width="16" height="16" />
                     <span>Login</span>
                 </a>
                 <a href="{{ path('app_register') }}" class="flex items-center gap-1 text-sm/6 font-semibold text-gray-900 hover:text-green-500">
-                    <twig:Icon name="heroicons:user-plus" class="text-gray-500" width="16" height="16" />
+                    <twig:UI:Icon name="heroicons:user-plus" class="text-gray-500" width="16" height="16" />
                     <span>Register</span>
                 </a>
             </div>

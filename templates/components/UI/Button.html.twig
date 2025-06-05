@@ -1,6 +1,6 @@
 <button type="button" class="flex items-center gap-1 px-3 py-2 hover:bg-gray-100 rounded-md transition-colors">
     {% if icon %}
-        <twig:Icon name="{{ icon }}" class="{{ iconClass ?? '' }}" width="{{ iconSize ?? '16' }}" height="{{ iconSize ?? '16' }}" />
+        <twig:UI:Icon name="{{ icon }}" class="{{ iconClass ?? '' }}" width="{{ iconSize ?? '16' }}" height="{{ iconSize ?? '16' }}" />
     {% endif %}
     {% if text %}
         <span>{{ text }}</span>
