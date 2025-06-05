@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 
 #[AsTwigComponent]
-final class BookSlider
+final class Slider
 {
     public string $sliderId;
     public string $cardTitle;

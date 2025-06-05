@@ -5,7 +5,7 @@ namespace App\Twig\Components;
 use Symfony\UX\TwigComponent\Attribute\AsTwigComponent;
 use Symfony\UX\TwigComponent\Attribute\ExposeInTemplate;
 
-#[AsTwigComponent]
+#[AsTwigComponent('Dropdown')]
 class Dropdown
 {
     #[ExposeInTemplate]
@@ -14,7 +14,13 @@ class Dropdown
     #[ExposeInTemplate]
     public ?string $buttonIcon = null;
 
-    /** @var array<array{label: string, path: string, icon?: string}> */
+    #[ExposeInTemplate]
+    public ?string $buttonIconClass = null;
+
+    #[ExposeInTemplate]
+    public ?string $buttonIconSize = null;
+
+    /** @var array<array{label: string, path: string, icon?: string, iconClass?: string, iconSize?: string}> */
     #[ExposeInTemplate]
     public array $items = [];
 

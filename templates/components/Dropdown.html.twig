@@ -1,22 +1,22 @@
 <div class="relative" data-controller="dropdown" data-action="click->dropdown#toggle click@window->dropdown#hide">
-    <button type="button" class="flex items-center gap-1 px-3 py-2 hover:bg-gray-100 rounded-md transition-colors" data-dropdown-target="button">
-        {% if buttonIcon is not empty %}
-            {% if buttonIcon matches '/^<svg/' %}
-                {{ buttonIcon|raw }}
-            {% else %}
-                <span>{{ buttonIcon }}</span>
-            {% endif %}
-        {% endif %}
-        {% if buttonText is not empty %}
-            <span>{{ buttonText }}</span>
-        {% endif %}
-    </button>
+    <twig:Button
+            text="{{ buttonText }}"
+            icon="{{ buttonIcon }}"
+            iconClass="{{ buttonIconClass }}"
+            iconSize="{{ buttonIconSize }}"
+            data-dropdown-target="button"
+    />
 
     <div class="hidden absolute z-50 mt-2 w-56 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 py-1 {{ position == 'right' ? 'right-0' : 'left-0' }}" data-dropdown-target="menu">
         {% for item in items %}
             <a href="{{ item.path }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                 {% if item.icon is defined and item.icon is not empty %}
-                    <span class="mr-2">{{ item.icon }}</span>
+                    <twig:Icon
+                            name="{{ item.icon }}"
+                            class="{{ item.iconClass ?? '' }} mr-2"
+                            width="{{ item.iconSize ?? '16' }}"
+                            height="{{ item.iconSize ?? '16' }}"
+                    />
                 {% endif %}
                 {{ item.label }}
             </a>

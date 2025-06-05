@@ -13,7 +13,7 @@
     {% block body %}
         {% if themes is defined %}
             {% for theme in themes %}
-                <twig:Book:BookSlider
+                <twig:Book:Slider
                         sliderId="slider_theme_{{ theme.id }}"
                         cardTitle="{{ theme.name }}"
                         :books="theme.books"
@@ -21,7 +21,7 @@
             {% endfor %}
         {% elseif authors is defined %}
             {% for author in authors %}
-                <twig:Book:BookSlider
+                <twig:Book:Slider
                         sliderId="slider_author_{{ author.id }}"
                         cardTitle="{{ author.name }}"
                         :books="author.books"
