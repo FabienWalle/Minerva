@@ -1,0 +1,58 @@
+<div
+        {{ attributes }}
+        class="relative w-[20vw]"
+        data-controller="search-keyboard"
+        data-search-keyboard-target="container">
+    <div class="relative">
+        <input
+                type="text"
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Rechercher livres, auteurs ou thèmes..."
+                value="{{ this.query }}"
+                data-action="input->search-keyboard#clear"
+                data-model="query"
+                data-search-keyboard-target="input"
+        >
+
+        {% if this.query %}
+            <button
+                    class="absolute right-3 top-2 text-red-300 hover:text-red-500"
+                    data-action="live#action"
+                    data-live-action-param="clear"
+                    aria-label="Effacer la recherche"
+            >
+                Effacer
+            </button>
+        {% endif %}
+    </div>
+
+    {% if this.query %}
+        <div class="absolute right-0 w-80 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg max-h-96 overflow-y-auto z-50"
+             data-search-keyboard-target="results">
+
+            {% for book in this.books %}
+                <a href="{{ path('app_book', {id: book.id}) }}"
+                   class="block px-4 py-2 hover:bg-gray-100 border-b border-gray-100 last:border-b-0 transition-colors duration-200"
+                   data-search-keyboard-target="result"
+                   data-action="click->search-keyboard#activateSelected">
+
+                    <div class="font-medium">{{ book.title }}</div>
+
+                    <div class="text-sm text-gray-600">
+                        {% if book.authors|length > 0 %}
+                            par {{ book.authors|map(a => a.name)|join(', ') }}
+                        {% endif %}
+
+                        {% if book.themes|length > 0 %}
+                            <span class="text-xs text-gray-400 ml-2">
+                ({{ book.themes|map(t => t.name)|join(', ') }})
+              </span>
+                        {% endif %}
+                    </div>
+                </a>
+            {% else %}
+                <div class="px-4 py-2 text-gray-500">Aucun résultat trouvé</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>

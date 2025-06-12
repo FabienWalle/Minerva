@@ -23,6 +23,20 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
+    public function search(string $query): array
+    {
+        return $this->createQueryBuilder('b')
+            ->leftJoin('b.authors', 'a')
+            ->leftJoin('b.themes', 't')
+            ->where('LOWER(b.title) LIKE LOWER(:query)')
+            ->orWhere('LOWER(a.name) LIKE LOWER(:query)')
+            ->orWhere('LOWER(t.name) LIKE LOWER(:query)')
+            ->setParameter('query', '%' . $query . '%')
+            ->orderBy('b.title', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findThemesWithMinBooks(int $minBooks = 10): array
     {
         $themeIds = $this->getThemeIdsWithMinBooks($minBooks);

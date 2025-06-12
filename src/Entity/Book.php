@@ -178,7 +178,7 @@ class Book
     /**
      * @return Collection<int, Theme>
      */
-    public function getTheme(): Collection
+    public function getThemes(): Collection
     {
         return $this->themes;
     }
