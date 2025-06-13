@@ -31,7 +31,7 @@
              data-search-keyboard-target="results">
 
             {% for book in this.books %}
-                <a href="{{ path('app_book', {id: book.id}) }}"
+                <a href="{{ path('app_book_show', {id: book.id}) }}"
                    class="block px-4 py-2 hover:bg-gray-100 border-b border-gray-100 last:border-b-0 transition-colors duration-200"
                    data-search-keyboard-target="result"
                    data-action="click->search-keyboard#activateSelected">

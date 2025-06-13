@@ -7,9 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/book', name: 'app_book_')]
 final class BookController extends AbstractController
 {
-    #[Route('/book/{id}', name: 'app_book')]
+    #[Route('/{id}', name: 'show')]
     public function index(BookRepository $bookRepository, Int $id): Response
     {
         $book = $bookRepository->find($id);

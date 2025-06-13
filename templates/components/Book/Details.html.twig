@@ -53,14 +53,16 @@
             </span>
             </div>
 
-            <a href="#" class="gap-2 flex inline-flex items-center bg-indigo-600 text-white py-1.5 pr-2 ps-3 rounded-lg">
-                <span>{{ is_available ? 'Emprunter' : 'Réserver' }}</span>
-                {% if is_available %}
-                    <twig:ux:icon name="mdi:hand-open" class="size-5"/>
-                {% else %}
-                    <twig:ux:icon name="subway:time-1" class="size-5"/>
-                {% endif %}
-            </a>
+            <form action="{{ path('app_loans_borrow', {id: book.id}) }}" method="post">
+                <button type="submit" class="gap-2 flex inline-flex items-center bg-indigo-600 text-white py-1.5 pr-2 ps-3 rounded-lg">
+                    <span>{{ is_available ? 'Emprunter' : 'Réserver' }}</span>
+                    {% if is_available %}
+                        <twig:ux:icon name="mdi:hand-open" class="size-5"/>
+                    {% else %}
+                        <twig:ux:icon name="subway:time-1" class="size-5"/>
+                    {% endif %}
+                </button>
+            </form>
 
         </div>
     </div>

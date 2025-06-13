@@ -31,6 +31,12 @@ class Borrowing
     #[ORM\JoinColumn(nullable: false)]
     private ?BookCopy $bookCopy = null;
 
+    public function __construct()
+    {
+        $this->borrowDate = new \DateTime();
+        $this->dueDate = (new \DateTime())->modify('+30 days');
+    }
+
     public function getId(): ?int
     {
         return $this->id;
