@@ -12,7 +12,11 @@
 </head>
 <body class="h-full bg-white">
     <twig:Layout:NavBar/>
-    {% block body %}
-    {% endblock %}
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <twig:UI:FlashMessage type="{{ type }}" message="{{ message }}"/>
+        {% endfor %}
+    {% endfor %}
+    {% block body %}{% endblock %}
 </body>
 </html>

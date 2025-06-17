@@ -1,0 +1,24 @@
+{% set colors = this.getColorClasses() %}
+
+<div class="px-4 py-3 rounded relative {{ colors.bg }} {{ colors.border }} {{ colors.text }}"
+     role="alert"
+     data-controller="flash-message">
+
+    <div class="flex items-start">
+        <div class="flex-shrink-0 mt-1">
+            <twig:UI:Icon name="{{ this.getIconName() }}" class="h-5 w-5 {{ colors.icon_color }}"/>
+        </div>
+
+        <div class="flex-1 mx-2">
+            <strong class="font-bold">{{ type|capitalize }}</strong>
+            <span class="block sm:inline">{{ message }}</span>
+        </div>
+
+        <button type="button"
+                class=""
+                data-action="click->flash-message#close"
+                aria-label="Close">
+            <twig:UI:Icon name="system-uicons:cross-circle" class="h-5 w-5 text-black mt-1"/>
+        </button>
+    </div>
+</div>

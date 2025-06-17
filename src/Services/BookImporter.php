@@ -197,7 +197,7 @@ class BookImporter
 
     private function handleExistingBook(Book $book, ?Theme $theme, OutputInterface $output): void
     {
-        if ($theme && !$book->getTheme()->contains($theme)) {
+        if ($theme && !$book->getThemes()->contains($theme)) {
             $book->addTheme($theme);
             $this->entityManager->flush();
             $output->writeln(sprintf('Added theme %s to existing book: %s', $theme->getName(), $book->getTitle()));
