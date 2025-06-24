@@ -3,8 +3,8 @@
 start :
 	symfony server:start
 
-log :
-	symfony server:log
+messenger :
+	php bin/console messenger:consume async --limit=10 --memory-limit=256M --time-limit=3600 -vv
 
 reset-db:
 	php bin/console doctrine:database:drop --force
