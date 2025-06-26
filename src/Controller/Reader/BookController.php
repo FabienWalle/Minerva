@@ -10,10 +10,10 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/book', name: 'app_book_')]
 final class BookController extends AbstractController
 {
-    #[Route('/{id}', name: 'show')]
-    public function index(BookRepository $bookRepository, Int $id): Response
+    #[Route('/{slug}', name: 'show')]
+    public function index(BookRepository $bookRepository, string $slug): Response
     {
-        $book = $bookRepository->find($id);
+        $book = $bookRepository->findOneBy(['slug' => $slug]);
 
         if (!$book) {
             throw $this->createNotFoundException('Livre non trouvé.');

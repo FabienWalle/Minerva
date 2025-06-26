@@ -12,6 +12,6 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\Services\BookImporter:
+    App\Services\Book\BookImporter:
         arguments:
             $googleBooksApiKey: '%env(GOOGLE_BOOK_API_KEY)%'

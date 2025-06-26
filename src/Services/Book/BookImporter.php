@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Book;
 
 use App\Entity\Author;
 use App\Entity\Book;
@@ -8,15 +8,15 @@ use App\Entity\BookCopy;
 use App\Entity\Theme;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
-use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
-class BookImporter
+final class BookImporter
 {
     private const API_BASE_URL = 'https://www.googleapis.com/books/v1/volumes';
     private const MAX_RESULTS = 30;
@@ -54,7 +54,8 @@ class BookImporter
 
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly string $googleBooksApiKey
+        private readonly string $googleBooksApiKey,
+        private readonly BookSlugGenerator $slugGenerator
     ) {
     }
 
@@ -190,7 +191,13 @@ class BookImporter
         }
 
         $this->entityManager->persist($book);
+        $this->entityManager->flush();
+
+        $slug = $this->slugGenerator->generateBookSlug($book);
+        $book->setSlug($slug);
+
         $this->createBookCopies($book);
+        $this->entityManager->flush();
 
         $output->writeln(sprintf('Imported: %s (%s)', $bookTitle, $theme ? $theme->getName() : $searchAuthor));
     }

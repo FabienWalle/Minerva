@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\BorrowingRepository;
+use App\Repository\BorrowingsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: BorrowingRepository::class)]
+#[ORM\Entity(repositoryClass: BorrowingsRepository::class)]
 class Borrowing
 {
     #[ORM\Id]

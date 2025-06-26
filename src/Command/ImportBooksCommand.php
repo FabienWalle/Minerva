@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Services\BookImporter;
+use App\Services\Book\BookImporter;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
