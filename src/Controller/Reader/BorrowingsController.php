@@ -14,26 +14,6 @@ final class BorrowingsController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(BorrowingsRepository $repository): Response
     {
-        /** @var User $user */
-        $user = $this->getUser();
-        $borrowings = $repository->findUserBorrowings($user);
-
-        return $this->render('borrowings/index.html.twig', [
-            'borrowings' => $borrowings
-        ]);
-    }
-
-    #[Route('/{id}', name: 'show')]
-    public function show(int $id, BorrowingsRepository $repository): Response
-    {
-        $borrowing = $repository->findOneBy(['id' => $id, 'borrowedBy' => $this->getUser()]);
-
-        if (!$borrowing) {
-            throw $this->createNotFoundException('Emprunt non trouvé');
-        }
-
-        return $this->render('borrowings/show.html.twig', [
-            'borrowing' => $borrowing,
-        ]);
+        return $this->render('borrowings/index.html.twig');
     }
 }

@@ -20,7 +20,10 @@ class BorrowingsRepository extends ServiceEntityRepository
     public function findUserBorrowings(User $user): array
     {
         return $this->createQueryBuilder('b')
-            ->andWhere('b.borrowedBy = :user')
+            ->leftJoin('b.bookCopy', 'bc')
+            ->leftJoin('bc.book', 'book')
+            ->leftJoin('book.authors', 'authors')
+            ->where('b.borrowedBy = :user')
             ->setParameter('user', $user)
             ->orderBy('b.borrowDate', 'DESC')
             ->getQuery()

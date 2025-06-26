@@ -1,0 +1,27 @@
+<div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200 px-1.5">
+        <thead class="bg-gray-50">
+        <tr>
+            <th class="px-3 py-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Livre</th>
+            <th class="px-3 py-1 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Date emprunt
+            </th>
+            <th class="px-3 py-1 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Date retour
+                prévu
+            </th>
+            <th class="px-3 py-1 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
+        </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+        {% for borrowing in this.borrowings %}
+            <twig:Borrowing:BorrowingListItem :borrowing="borrowing"/>
+        {% else %}
+            <tr>
+                <td colspan="4" class="text-center text-sm text-gray-500">
+                    <twig:ux:icon name="fa6-solid:book-open" class="inline mr-2"/>
+                    Aucun emprunt trouvé
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
